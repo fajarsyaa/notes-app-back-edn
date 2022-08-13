@@ -4,7 +4,10 @@ const routes = require('./routes');
 const init = async() => {
     const Server = Hapi.server({
         port : 5000,
-        host : 'localhost', 
+
+        // kondisi digunakan untuk membedakan server dijalanakn di local pc / internet
+        host : process.env.NODE_ENV !== 'production'  ? 'localhost' : '0.0.0.0', 
+        
         //  menangani same-origin-police ? caritau lebih lanjut di google
         routes: {
             cors: {
